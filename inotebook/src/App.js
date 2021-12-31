@@ -9,12 +9,14 @@ import {
 import Navbar from './Components/Navbar';
 import About from './Components/About';
 import NoteState from './Context/notes/NoteState';
+import Alert from './Components/Alert'
 function App() {
   return (
     <>
       <NoteState>
         <Router>
           <Navbar></Navbar>
+          <Alert message="this is amazing" />
           <div className="container">
             <Routes>
               <Route exact path="/" element={<Home />} />
