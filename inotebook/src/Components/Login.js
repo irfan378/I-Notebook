@@ -8,24 +8,28 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const { name, email, password } = credentials;
         const response = await fetch('http://localhost:5000/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
 
             },
-            body: JSON.stringify({ email: credentials.email, password: credentials.password })
+            body: JSON.stringify({ email, password })
         });
         const json = await response.json()
         console.log(json);
+
+        // save the auth token and redirect
         if (json.success) {
-            // save the auth token and redirect
+
             localStorage.setItem('token', json.authtoken);
             navigate("/");
         }
         else {
-            alert('Invalid credentials');
+            alert("Invalid credentials")
         }
+
     }
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
