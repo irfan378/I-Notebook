@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 const Notes = (props) => {
     const context = useContext(noteContext);
     const { notes, getNotes, editNote } = context;
+
     let navigate = useNavigate();
     useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -38,6 +39,11 @@ const Notes = (props) => {
     const onChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
     }
+    let myStyle = {
+        color: props.mode === 'dark' ? 'white' : '#48599a',
+        backgroundColor: props.mode === 'dark' ? '#48599a' : 'dark'
+    }
+
     return (
         <>
             <AddNote showAlert={props.showAlert} />
@@ -77,7 +83,7 @@ const Notes = (props) => {
                 </div>
             </div>
 
-            <div className="row my-3">
+            <div className="row my-3" style={myStyle}>
                 <h2>Your Notes</h2>
                 <div className="container mx-2">
                     {notes.length === 0 && 'No notes to display'}

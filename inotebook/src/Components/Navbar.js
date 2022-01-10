@@ -1,7 +1,12 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = (props) => {
+    let navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate("/login");
+    }
     let location = useLocation();
 
     return (
@@ -21,10 +26,14 @@ const Navbar = () => {
                         </li>
 
                     </ul>
-                    <form className="d-flex">
-                        <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
-                        <Link className="btn btn-primary mx-1" to="/signup" role="button">Sign Up</Link>
-                    </form>
+                    {!localStorage.getItem('token') ? <form className="d-flex">
+                        <Link className="btn btn-primary mx-3" to="/login" role="button">Login</Link>
+                        <Link className="btn btn-primary mx-3" to="/signup" role="button">Sign Up</Link>
+                    </form> : <button onClick={handleLogout} className='btn btn-primary mx-3'>Logout</button>}
+                    <div className={`form-check form-switch text-${props.mode === 'light' ? 'light' : 'dark'}`}>
+                        <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={props.toggleMode} />
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Enable Dark-Mode</label>
+                    </div>
                 </div>
             </div>
         </nav>

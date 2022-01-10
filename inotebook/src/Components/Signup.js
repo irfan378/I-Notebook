@@ -32,9 +32,14 @@ const Signup = (props) => {
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
+    let myStyle = {
+        color: props.mode === 'dark' ? 'white' : '#48599a',
+        backgroundColor: props.mode === 'dark' ? '#48599a' : 'dark'
+    }
     return (
-        <div>
+        <div style={myStyle}>
             <form onSubmit={handleSubmit}>
+                <h3 className='mb-3'>Sign Up</h3>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Name</label>
                     <input type="text" className="form-control" id="name" aria-describedby="emailHelp" onChange={onChange} name='name' />

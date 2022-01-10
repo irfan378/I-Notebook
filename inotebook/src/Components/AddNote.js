@@ -14,13 +14,18 @@ const AddNote = (props) => {
     const onChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
     }
+    let myStyle = {
+        color: props.mode === 'dark' ? 'white' : '#48599a',
+        backgroundColor: props.mode === 'dark' ? '#48599a' : 'dark '
+    }
+
     return (
         <div>
-            <div className="container my-3">
+            <div className="container my-3" style={myStyle}>
                 <h2>Add a note</h2>
-                <form className='my-3'>
-                    <div className="mb-3">
-                        <label htmlFor="title" className="form-label">Title</label>
+                <form className='my-3' >
+                    <div className="mb-3" >
+                        <label htmlFor="title" className="form-label" >Title</label>
                         <input type="text" className="form-control" id="title" name="title" aria-describedby="emailHelp" value={note.title} onChange={onChange} minLength={5} required />
 
                     </div>

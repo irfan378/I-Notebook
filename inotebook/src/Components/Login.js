@@ -8,7 +8,7 @@ const Login = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { name, email, password } = credentials;
+        const { email, password } = credentials;
         const response = await fetch('http://localhost:5000/api/auth/login', {
             method: 'POST',
             headers: {
@@ -36,8 +36,13 @@ const Login = (props) => {
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
+    let myStyle = {
+        color: props.mode === 'dark' ? 'white' : '#48599a',
+        backgroundColor: props.mode === 'dark' ? '#48599a' : 'dark '
+    }
     return (
-        <div>
+        <div style={myStyle}>
+            <h3 className='mb-3'>Login</h3>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
